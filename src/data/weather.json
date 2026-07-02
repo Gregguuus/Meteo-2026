@@ -1,0 +1,1362 @@
+[
+  {
+    "date": "2026-01-01",
+    "temp_matin": 2,
+    "temp_aprem": null,
+    "condition_matin": "maison petit soleil",
+    "condition_aprem": "neige",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Neige",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-02",
+    "temp_matin": 2,
+    "temp_aprem": null,
+    "condition_matin": "pluie neige grêle",
+    "condition_aprem": "neige",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Neige",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-03",
+    "temp_matin": 0,
+    "temp_aprem": null,
+    "condition_matin": "sol couvert de neige soleil",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-04",
+    "temp_matin": -2,
+    "temp_aprem": null,
+    "condition_matin": "soleil",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-05",
+    "temp_matin": 0,
+    "temp_aprem": null,
+    "condition_matin": "a soleil",
+    "condition_aprem": "neige apm",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Neige",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-06",
+    "temp_matin": -2.5,
+    "temp_aprem": null,
+    "condition_matin": "à soleil",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-07",
+    "temp_matin": -8,
+    "temp_aprem": null,
+    "condition_matin": "à ( ressenti ) neige neige",
+    "condition_aprem": "",
+    "categorie_matin": "Neige",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-08",
+    "temp_matin": 3,
+    "temp_aprem": 8,
+    "condition_matin": "pluie à",
+    "condition_aprem": "pluie",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-09",
+    "temp_matin": 4,
+    "temp_aprem": null,
+    "condition_matin": "pluie tempête",
+    "condition_aprem": "",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-10",
+    "temp_matin": 4,
+    "temp_aprem": null,
+    "condition_matin": "nuageux",
+    "condition_aprem": "",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-11",
+    "temp_matin": -1,
+    "temp_aprem": null,
+    "condition_matin": "a",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-12",
+    "temp_matin": 7,
+    "temp_aprem": 10,
+    "condition_matin": "a",
+    "condition_aprem": "à nuages",
+    "categorie_matin": "",
+    "categorie_aprem": "Nuageux",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-13",
+    "temp_matin": 7,
+    "temp_aprem": 10,
+    "condition_matin": "a",
+    "condition_aprem": "à nuages",
+    "categorie_matin": "",
+    "categorie_aprem": "Nuageux",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-14",
+    "temp_matin": 9,
+    "temp_aprem": null,
+    "condition_matin": "à 🌧️",
+    "condition_aprem": "",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-15",
+    "temp_matin": 9,
+    "temp_aprem": 12,
+    "condition_matin": "nuage",
+    "condition_aprem": "à",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-16",
+    "temp_matin": 8,
+    "temp_aprem": null,
+    "condition_matin": "a",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-17",
+    "temp_matin": 12,
+    "temp_aprem": null,
+    "condition_matin": "à soleil toute l'après-midi",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-19",
+    "temp_matin": null,
+    "temp_aprem": 10,
+    "condition_matin": "deux °à",
+    "condition_aprem": "soleil",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-20",
+    "temp_matin": 5,
+    "temp_aprem": 9,
+    "condition_matin": "à",
+    "condition_aprem": "à soleil",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-21",
+    "temp_matin": 8,
+    "temp_aprem": 12,
+    "condition_matin": "à",
+    "condition_aprem": "soleil nuage",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-22",
+    "temp_matin": 9,
+    "temp_aprem": null,
+    "condition_matin": "à",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-23",
+    "temp_matin": 6.5,
+    "temp_aprem": null,
+    "condition_matin": ", à 🌧️",
+    "condition_aprem": "",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-24",
+    "temp_matin": 6,
+    "temp_aprem": null,
+    "condition_matin": "à soleil",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-25",
+    "temp_matin": 5,
+    "temp_aprem": null,
+    "condition_matin": "à",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-26",
+    "temp_matin": 6,
+    "temp_aprem": 8,
+    "condition_matin": "🌧️",
+    "condition_aprem": "☁️ frais",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Nuageux",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-27",
+    "temp_matin": 5,
+    "temp_aprem": 10,
+    "condition_matin": "🌧️",
+    "condition_aprem": "pluie 🌧️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-28",
+    "temp_matin": 3,
+    "temp_aprem": null,
+    "condition_matin": "à",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-29",
+    "temp_matin": 0,
+    "temp_aprem": 3.5,
+    "condition_matin": "à brouillard",
+    "condition_aprem": ",",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-30",
+    "temp_matin": 7,
+    "temp_aprem": null,
+    "condition_matin": "à",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-01-31",
+    "temp_matin": 6,
+    "temp_aprem": null,
+    "condition_matin": "à",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-02",
+    "temp_matin": 17,
+    "temp_aprem": null,
+    "condition_matin": "soleil 🌞",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-03",
+    "temp_matin": 18,
+    "temp_aprem": null,
+    "condition_matin": "soleil 🌞",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-04",
+    "temp_matin": 18,
+    "temp_aprem": null,
+    "condition_matin": "soleil 🌞",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-05",
+    "temp_matin": 18,
+    "temp_aprem": null,
+    "condition_matin": "soleil 🌞",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-10",
+    "temp_matin": 15,
+    "temp_aprem": null,
+    "condition_matin": "soleil et pluie",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-11",
+    "temp_matin": 10,
+    "temp_aprem": 15,
+    "condition_matin": "🌧️",
+    "condition_aprem": "🌞",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-12",
+    "temp_matin": 4,
+    "temp_aprem": 12,
+    "condition_matin": "à",
+    "condition_aprem": "ressenti !",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-13",
+    "temp_matin": 10,
+    "temp_aprem": null,
+    "condition_matin": "vent",
+    "condition_aprem": "",
+    "categorie_matin": "Vent",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-16",
+    "temp_matin": 7.5,
+    "temp_aprem": null,
+    "condition_matin": ", à",
+    "condition_aprem": "nuageux",
+    "categorie_matin": "",
+    "categorie_aprem": "Nuageux",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-17",
+    "temp_matin": 7,
+    "temp_aprem": 15,
+    "condition_matin": "à 🌞",
+    "condition_aprem": "🌞",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-18",
+    "temp_matin": 5.5,
+    "temp_aprem": null,
+    "condition_matin": ", à",
+    "condition_aprem": "idem",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-19",
+    "temp_matin": 5.5,
+    "temp_aprem": 18,
+    "condition_matin": ", à",
+    "condition_aprem": "soleil 🌞",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-23",
+    "temp_matin": 8,
+    "temp_aprem": 17,
+    "condition_matin": "matin",
+    "condition_aprem": "🌞",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-24",
+    "temp_matin": 6,
+    "temp_aprem": null,
+    "condition_matin": "à soleil",
+    "condition_aprem": "idem",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-25",
+    "temp_matin": 7,
+    "temp_aprem": 5,
+    "condition_matin": "à pluie",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Nuageux",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-26",
+    "temp_matin": 3,
+    "temp_aprem": 7,
+    "condition_matin": "à",
+    "condition_aprem": "idem",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-27",
+    "temp_matin": 3,
+    "temp_aprem": 7,
+    "condition_matin": "à",
+    "condition_aprem": "idem",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-03-30",
+    "temp_matin": 8,
+    "temp_aprem": null,
+    "condition_matin": "à",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-01",
+    "temp_matin": 10,
+    "temp_aprem": null,
+    "condition_matin": "nuageux ☁️",
+    "condition_aprem": "",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-02",
+    "temp_matin": 10,
+    "temp_aprem": null,
+    "condition_matin": "nuageux ☁️",
+    "condition_aprem": "",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-03",
+    "temp_matin": 1.5,
+    "temp_aprem": 10,
+    "condition_matin": ", à",
+    "condition_aprem": "🌧️",
+    "categorie_matin": "",
+    "categorie_aprem": "Pluie",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-04",
+    "temp_matin": 11,
+    "temp_aprem": 15,
+    "condition_matin": "pluie",
+    "condition_aprem": "🌞 ⛅️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-05",
+    "temp_matin": 15,
+    "temp_aprem": null,
+    "condition_matin": "nuages",
+    "condition_aprem": "",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-06",
+    "temp_matin": 18,
+    "temp_aprem": null,
+    "condition_matin": "soleil 🌞",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-07",
+    "temp_matin": 5,
+    "temp_aprem": 25,
+    "condition_matin": "à",
+    "condition_aprem": "🌞",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-08",
+    "temp_matin": 7.5,
+    "temp_aprem": 24,
+    "condition_matin": ", à",
+    "condition_aprem": "🌞",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-09",
+    "temp_matin": 8.5,
+    "temp_aprem": 27,
+    "condition_matin": ", à",
+    "condition_aprem": "🌞",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-10",
+    "temp_matin": 7.5,
+    "temp_aprem": 17,
+    "condition_matin": ", à",
+    "condition_aprem": "☁️ 🌞",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-11",
+    "temp_matin": 10,
+    "temp_aprem": null,
+    "condition_matin": "à",
+    "condition_aprem": "",
+    "categorie_matin": "",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-16",
+    "temp_matin": 11,
+    "temp_aprem": 19,
+    "condition_matin": "à",
+    "condition_aprem": "🌞",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-17",
+    "temp_matin": 9,
+    "temp_aprem": 19,
+    "condition_matin": "à",
+    "condition_aprem": "soleil 🌞",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-18",
+    "temp_matin": 12,
+    "temp_aprem": 21,
+    "condition_matin": "a",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "",
+    "categorie_aprem": "Nuageux",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-20",
+    "temp_matin": 13,
+    "temp_aprem": 15,
+    "condition_matin": "soleil vent",
+    "condition_aprem": "☀️ 💨",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-21",
+    "temp_matin": 4,
+    "temp_aprem": 17,
+    "condition_matin": "a",
+    "condition_aprem": "soleil ☀️ Pornic",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-04-22",
+    "temp_matin": 16,
+    "temp_aprem": 22,
+    "condition_matin": "a ☀️ 💨 givrand",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Givrand"
+  },
+  {
+    "date": "2026-04-23",
+    "temp_matin": 16,
+    "temp_aprem": 25,
+    "condition_matin": "a ☀️ 💨 givrand",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-04-24",
+    "temp_matin": 25,
+    "temp_aprem": 27,
+    "condition_matin": "a ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-04-25",
+    "temp_matin": 18,
+    "temp_aprem": 26,
+    "condition_matin": "à 🌥️",
+    "condition_aprem": "☀️ Challans",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Challans"
+  },
+  {
+    "date": "2026-04-26",
+    "temp_matin": 20,
+    "temp_aprem": null,
+    "condition_matin": "à ☁️ piscine",
+    "condition_aprem": "",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-04-27",
+    "temp_matin": 17,
+    "temp_aprem": 25,
+    "condition_matin": "à 🌥️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-04-28",
+    "temp_matin": 17,
+    "temp_aprem": 25,
+    "condition_matin": "à 🌥️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-04-29",
+    "temp_matin": 13,
+    "temp_aprem": 25,
+    "condition_matin": "départ maison ☁️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-04-30",
+    "temp_matin": 12,
+    "temp_aprem": null,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "idem",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-01",
+    "temp_matin": 27,
+    "temp_aprem": null,
+    "condition_matin": "☀️",
+    "condition_aprem": "",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-02",
+    "temp_matin": 19,
+    "temp_aprem": 27,
+    "condition_matin": "☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-03",
+    "temp_matin": 15,
+    "temp_aprem": 17,
+    "condition_matin": "🌧️",
+    "condition_aprem": "pluie",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-04",
+    "temp_matin": 15,
+    "temp_aprem": 17,
+    "condition_matin": "🌧️",
+    "condition_aprem": "pluie",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-05",
+    "temp_matin": 12,
+    "temp_aprem": 12,
+    "condition_matin": "à",
+    "condition_aprem": "pluie humide froid",
+    "categorie_matin": "",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-06",
+    "temp_matin": 9,
+    "temp_aprem": 13.5,
+    "condition_matin": "pluie",
+    "condition_aprem": "☁️ humide",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-07",
+    "temp_matin": 9,
+    "temp_aprem": 18,
+    "condition_matin": "à",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-08",
+    "temp_matin": 9,
+    "temp_aprem": 22,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-09",
+    "temp_matin": 12,
+    "temp_aprem": 25,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-10",
+    "temp_matin": 11,
+    "temp_aprem": 18,
+    "condition_matin": "a 🌧️",
+    "condition_aprem": "🌧️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-11",
+    "temp_matin": 9,
+    "temp_aprem": 14,
+    "condition_matin": "ºc a 🌧️",
+    "condition_aprem": "nuages ☁️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-12",
+    "temp_matin": 3,
+    "temp_aprem": 15,
+    "condition_matin": "a",
+    "condition_aprem": "☀️",
+    "categorie_matin": "",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-13",
+    "temp_matin": 10,
+    "temp_aprem": 12,
+    "condition_matin": "a ☁️",
+    "condition_aprem": "🌧️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-14",
+    "temp_matin": 9,
+    "temp_aprem": 10,
+    "condition_matin": "a ☁️",
+    "condition_aprem": "🌧️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-15",
+    "temp_matin": 10,
+    "temp_aprem": 15,
+    "condition_matin": "a ☀️",
+    "condition_aprem": "🌧️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-16",
+    "temp_matin": 9,
+    "temp_aprem": 13,
+    "condition_matin": "a ☀️",
+    "condition_aprem": "☁️ 🌧️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-17",
+    "temp_matin": 12,
+    "temp_aprem": 15,
+    "condition_matin": "a 🌧️",
+    "condition_aprem": "🌧️ ☁️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-18",
+    "temp_matin": 8.5,
+    "temp_aprem": null,
+    "condition_matin": "ç a 🌧️",
+    "condition_aprem": "idem",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-19",
+    "temp_matin": 10,
+    "temp_aprem": 13,
+    "condition_matin": "a 🌧️",
+    "condition_aprem": "pluie 🌧️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-20",
+    "temp_matin": 12,
+    "temp_aprem": 20,
+    "condition_matin": "à ☁️",
+    "condition_aprem": "nuages ☁️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-21",
+    "temp_matin": 14,
+    "temp_aprem": 25,
+    "condition_matin": "à ☁️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-22",
+    "temp_matin": 13.5,
+    "temp_aprem": 29,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-23",
+    "temp_matin": 23,
+    "temp_aprem": 30,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-24",
+    "temp_matin": 23,
+    "temp_aprem": 34,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-25",
+    "temp_matin": 23,
+    "temp_aprem": 34,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-26",
+    "temp_matin": 19.5,
+    "temp_aprem": 32,
+    "condition_matin": ", a ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-27",
+    "temp_matin": 19.5,
+    "temp_aprem": 32,
+    "condition_matin": "soleil ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-28",
+    "temp_matin": 19.5,
+    "temp_aprem": 32,
+    "condition_matin": "soleil ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-29",
+    "temp_matin": 22,
+    "temp_aprem": 32,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-30",
+    "temp_matin": 23,
+    "temp_aprem": 34,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-05-31",
+    "temp_matin": 21,
+    "temp_aprem": 22,
+    "condition_matin": "à ⛅️",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-01",
+    "temp_matin": 15,
+    "temp_aprem": 25,
+    "condition_matin": "a ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-02",
+    "temp_matin": 19,
+    "temp_aprem": 22,
+    "condition_matin": "à 🌧️",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-03",
+    "temp_matin": 13,
+    "temp_aprem": 15,
+    "condition_matin": "à 🌧️",
+    "condition_aprem": "🌧️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-04",
+    "temp_matin": 13,
+    "temp_aprem": 13,
+    "condition_matin": "à 🌧️",
+    "condition_aprem": "🌧️ ☀️ 🌧️ 🌩️",
+    "categorie_matin": "Pluie",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-05",
+    "temp_matin": 11.5,
+    "temp_aprem": 20,
+    "condition_matin": "à ☁️",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-06",
+    "temp_matin": 15,
+    "temp_aprem": 20,
+    "condition_matin": "à ☁️",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-07",
+    "temp_matin": 11,
+    "temp_aprem": 23,
+    "condition_matin": "a ☁️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-08",
+    "temp_matin": 11,
+    "temp_aprem": 20,
+    "condition_matin": "a ☁️",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-09",
+    "temp_matin": 10,
+    "temp_aprem": 19,
+    "condition_matin": "à ⛅️",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-10",
+    "temp_matin": 13,
+    "temp_aprem": 18,
+    "condition_matin": "a ⛅️",
+    "condition_aprem": "🌧️ ⛅️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Pluie",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-11",
+    "temp_matin": 10,
+    "temp_aprem": 18,
+    "condition_matin": "a ⛅️",
+    "condition_aprem": "⛅️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-12",
+    "temp_matin": 16,
+    "temp_aprem": 24,
+    "condition_matin": "a ⛅️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-13",
+    "temp_matin": 18,
+    "temp_aprem": 25,
+    "condition_matin": "a ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-14",
+    "temp_matin": 21,
+    "temp_aprem": 25,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-15",
+    "temp_matin": 15,
+    "temp_aprem": 25,
+    "condition_matin": "a ☀️",
+    "condition_aprem": "☀️ 🌧️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-16",
+    "temp_matin": 19,
+    "temp_aprem": 27,
+    "condition_matin": "à ☁️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-17",
+    "temp_matin": 15,
+    "temp_aprem": 30,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-18",
+    "temp_matin": 22,
+    "temp_aprem": 33,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-19",
+    "temp_matin": 21,
+    "temp_aprem": 34,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-20",
+    "temp_matin": 21,
+    "temp_aprem": 34,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-21",
+    "temp_matin": 23,
+    "temp_aprem": 37,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-22",
+    "temp_matin": 27,
+    "temp_aprem": 37,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-23",
+    "temp_matin": 25,
+    "temp_aprem": 35,
+    "condition_matin": "à ☁️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-24",
+    "temp_matin": 24,
+    "temp_aprem": 38,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-25",
+    "temp_matin": 26,
+    "temp_aprem": 38,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-26",
+    "temp_matin": 26,
+    "temp_aprem": 35,
+    "condition_matin": "à ⛅️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Nuageux",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-27",
+    "temp_matin": 24,
+    "temp_aprem": 37,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-28",
+    "temp_matin": 22,
+    "temp_aprem": 32,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "soleil",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-29",
+    "temp_matin": 15,
+    "temp_aprem": 26,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-06-30",
+    "temp_matin": 15,
+    "temp_aprem": 26,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️ lourd",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-07-01",
+    "temp_matin": 15,
+    "temp_aprem": 25,
+    "condition_matin": "à ☀️",
+    "condition_aprem": "☀️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Soleil",
+    "ville": "Pornic"
+  },
+  {
+    "date": "2026-07-02",
+    "temp_matin": 14,
+    "temp_aprem": 25,
+    "condition_matin": "juillet à ☀️",
+    "condition_aprem": "☁️",
+    "categorie_matin": "Soleil",
+    "categorie_aprem": "Nuageux",
+    "ville": "Pornic"
+  }
+]
