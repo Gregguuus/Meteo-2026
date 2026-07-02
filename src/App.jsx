@@ -6,11 +6,6 @@ import MonthlyChart from './components/MonthlyChart';
 import ConditionsChart from './components/ConditionsChart';
 import DataTable from './components/DataTable';
 
-function formatDate(d) {
-  const [y, m, day] = d.split('-');
-  return `${day}/${m}`;
-}
-
 const MONTH_NAMES = {
   1: 'Janvier', 2: 'Février', 3: 'Mars', 4: 'Avril', 5: 'Mai', 6: 'Juin',
   7: 'Juillet', 8: 'Août', 9: 'Septembre', 10: 'Octobre', 11: 'Novembre', 12: 'Décembre',
@@ -23,55 +18,40 @@ export default function App() {
 
   const filtered = useMemo(() => {
     let f = [...data];
-    if (monthFilter !== 'all') {
-      f = f.filter((r) => {
-        const m = parseInt(r.date.split('-')[1]);
-        return m === parseInt(monthFilter);
-      });
-    }
-    if (conditionFilter !== 'all') {
-      f = f.filter((r) => r.categorie_aprem === conditionFilter);
-    }
+    if (monthFilter !== 'all')
+      f = f.filter(r => parseInt(r.date.split('-')[1]) === parseInt(monthFilter));
+    if (conditionFilter !== 'all')
+      f = f.filter(r => r.categorie_aprem === conditionFilter);
     return f;
   }, [monthFilter, conditionFilter]);
 
   return (
     <div className="container">
-      <header style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12 }}>
+      <header className="animate-fade" style={{ marginBottom: 40, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>Météo 2026</h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: 2 }}>
-            Givrand · Pornic · Vendée — {data.length} jours de relevés
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+            <div style={{
+              width: 40, height: 40, borderRadius: 12,
+              background: 'linear-gradient(135deg, var(--primary), #a78bfa)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 20, boxShadow: '0 4px 20px var(--primary-glow)',
+            }}>🌤</div>
+            <h1 style={{ fontSize: '1.6rem', fontWeight: 800, letterSpacing: '-0.5px' }}>
+              Météo <span className="gradient-text">2026</span>
+            </h1>
+          </div>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}>
+            Givrand · Pornic · Vendée — {data.length} jours de relevés personnels
           </p>
         </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <select
-            value={monthFilter}
-            onChange={(e) => setMonthFilter(e.target.value)}
-            style={{
-              padding: '6px 12px',
-              borderRadius: 6,
-              border: '1px solid var(--border)',
-              fontSize: '0.85rem',
-              background: 'white',
-            }}
-          >
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+          <select value={monthFilter} onChange={e => setMonthFilter(e.target.value)}>
             <option value="all">Tous les mois</option>
             {Object.entries(MONTH_NAMES).map(([k, v]) => (
               <option key={k} value={k}>{v}</option>
             ))}
           </select>
-          <select
-            value={conditionFilter}
-            onChange={(e) => setConditionFilter(e.target.value)}
-            style={{
-              padding: '6px 12px',
-              borderRadius: 6,
-              border: '1px solid var(--border)',
-              fontSize: '0.85rem',
-              background: 'white',
-            }}
-          >
+          <select value={conditionFilter} onChange={e => setConditionFilter(e.target.value)}>
             <option value="all">Toutes conditions</option>
             <option value="Soleil">☀️ Soleil</option>
             <option value="Nuageux">☁️ Nuageux</option>
@@ -84,37 +64,37 @@ export default function App() {
 
       <StatsCards data={filtered} />
 
-      <div className="tabs">
+      <div className="tabs animate-fade delay-3">
         {[
           { key: 'apercu', label: 'Aperçu' },
           { key: 'mensuel', label: 'Mensuel' },
           { key: 'conditions', label: 'Conditions' },
           { key: 'donnees', label: 'Données' },
-        ].map((t) => (
-          <button
-            key={t.key}
+        ].map(t => (
+          <button key={t.key}
             className={`tab-btn${tab === t.key ? ' active' : ''}`}
             onClick={() => setTab(t.key)}
-          >
-            {t.label}
-          </button>
+          >{t.label}</button>
         ))}
       </div>
 
       {tab === 'apercu' && (
-        <div className="card">
-          <div className="card-title">Évolution des températures</div>
+        <div className="card animate-fade delay-4">
+          <div className="card-title">
+            Évolution des températures
+            <span className="gradient-line" style={{ display: 'block', marginTop: 8 }} />
+          </div>
           <TempChart data={filtered} />
         </div>
       )}
 
       {tab === 'mensuel' && (
         <div className="grid-2">
-          <div className="card">
+          <div className="card animate-scale delay-1">
             <div className="card-title">Moyennes mensuelles</div>
             <MonthlyChart data={data} />
           </div>
-          <div className="card">
+          <div className="card animate-scale delay-2">
             <div className="card-title">Records par mois</div>
             <MonthlyRecords data={data} />
           </div>
@@ -123,11 +103,11 @@ export default function App() {
 
       {tab === 'conditions' && (
         <div className="grid-2">
-          <div className="card">
-            <div className="card-title">Répartition des conditions</div>
+          <div className="card animate-scale delay-1">
+            <div className="card-title">Répartition</div>
             <ConditionsChart data={filtered} />
           </div>
-          <div className="card">
+          <div className="card animate-scale delay-2">
             <div className="card-title">Conditions par mois</div>
             <ConditionsByMonth data={data} />
           </div>
@@ -135,11 +115,19 @@ export default function App() {
       )}
 
       {tab === 'donnees' && (
-        <div className="card">
+        <div className="card animate-fade delay-3">
           <div className="card-title">Relevés détaillés</div>
           <DataTable data={filtered} />
         </div>
       )}
+
+      <footer style={{
+        textAlign: 'center', marginTop: 60, paddingTop: 24,
+        borderTop: '1px solid var(--border)',
+        color: 'var(--text-secondary)', fontSize: '0.75rem',
+      }}>
+        Relevés météo personnels · Givrand & Pornic 2026
+      </footer>
     </div>
   );
 }
@@ -151,11 +139,11 @@ function MonthlyRecords({ data }) {
     if (!months[m]) months[m] = { max: -Infinity, min: Infinity, maxDate: '', minDate: '' };
     if (r.temp_aprem != null && r.temp_aprem > months[m].max) {
       months[m].max = r.temp_aprem;
-      months[m].maxDate = formatDate(r.date);
+      months[m].maxDate = fmt(r.date);
     }
     if (r.temp_matin != null && r.temp_matin < months[m].min) {
       months[m].min = r.temp_matin;
-      months[m].minDate = formatDate(r.date);
+      months[m].minDate = fmt(r.date);
     }
   }
 
@@ -165,20 +153,22 @@ function MonthlyRecords({ data }) {
         <thead>
           <tr>
             <th>Mois</th>
-            <th>🔥 Max</th>
-            <th>Date</th>
-            <th>❄️ Min</th>
-            <th>Date</th>
+            <th style={{ textAlign: 'right' }}>🔥 Max</th>
+            <th style={{ textAlign: 'right' }}>❄️ Min</th>
           </tr>
         </thead>
         <tbody>
           {Object.entries(months).map(([m, v]) => (
             <tr key={m}>
               <td style={{ fontWeight: 600 }}>{MONTH_NAMES[m]}</td>
-              <td className="temp-hot">{v.max > -Infinity ? `${v.max}°` : '-'}</td>
-              <td style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{v.maxDate}</td>
-              <td className="temp-cold">{v.min < Infinity ? `${v.min}°` : '-'}</td>
-              <td style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{v.minDate}</td>
+              <td style={{ textAlign: 'right' }}>
+                <span className="temp-hot">{v.max > -Infinity ? `${v.max}°` : '-'}</span>
+                <span style={{ marginLeft: 8, fontSize: '0.72rem', color: 'var(--text-secondary)' }}>{v.maxDate}</span>
+              </td>
+              <td style={{ textAlign: 'right' }}>
+                <span className="temp-cold">{v.min < Infinity ? `${v.min}°` : '-'}</span>
+                <span style={{ marginLeft: 8, fontSize: '0.72rem', color: 'var(--text-secondary)' }}>{v.minDate}</span>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -189,16 +179,14 @@ function MonthlyRecords({ data }) {
 
 function ConditionsByMonth({ data }) {
   const months = {};
-  const order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const order = [1, 2, 3, 4, 5, 6, 7];
   for (const r of data) {
     const m = parseInt(r.date.split('-')[1]);
     if (!months[m]) months[m] = {};
     const cat = r.categorie_aprem || 'Autre';
     months[m][cat] = (months[m][cat] || 0) + 1;
   }
-
   const cats = ['Soleil', 'Nuageux', 'Pluie', 'Neige', 'Vent'];
-  const colors = { Soleil: '#f59e0b', Nuageux: '#6b7280', Pluie: '#3b82f6', Neige: '#9ca3af', Vent: '#ec4899' };
 
   return (
     <div style={{ overflowX: 'auto' }}>
@@ -206,44 +194,45 @@ function ConditionsByMonth({ data }) {
         <thead>
           <tr>
             <th>Mois</th>
-            {cats.map((c) => (
-              <th key={c} style={{ textAlign: 'center', fontSize: '0.7rem' }}>{c}</th>
-            ))}
+            {cats.map(c => <th key={c} style={{ textAlign: 'center', fontSize: '0.65rem' }}>{c}</th>)}
           </tr>
         </thead>
         <tbody>
-          {order.filter((m) => months[m]).map((m) => {
-            const total = Object.values(months[m]).reduce((a, b) => a + b, 0);
-            return (
-              <tr key={m}>
-                <td style={{ fontWeight: 600 }}>{MONTH_NAMES[m]}</td>
-                {cats.map((c) => {
-                  const count = months[m][c] || 0;
-                  const pct = total > 0 ? (count / total) * 100 : 0;
-                  return (
-                    <td key={c} style={{ textAlign: 'center', verticalAlign: 'middle' }}>
-                      <div style={{
-                        display: 'inline-block',
-                        width: 28,
-                        height: 28,
-                        borderRadius: '50%',
-                        background: count > 0 ? colors[c] : 'transparent',
-                        opacity: count > 0 ? 0.7 + (pct / 100) * 0.3 : 0,
-                        lineHeight: '28px',
-                        fontSize: '0.75rem',
-                        fontWeight: 700,
-                        color: 'white',
-                      }}>
-                        {count > 0 ? count : ''}
-                      </div>
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          {order.filter(m => months[m]).map(m => (
+            <tr key={m}>
+              <td style={{ fontWeight: 600 }}>{MONTH_NAMES[m]}</td>
+              {cats.map(c => {
+                const count = months[m][c] || 0;
+                const total = Object.values(months[m]).reduce((a, b) => a + b, 0);
+                const pct = total > 0 ? (count / total) * 100 : 0;
+                return (
+                  <td key={c} style={{ textAlign: 'center' }}>
+                    <div style={{
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      width: 32, height: 32, borderRadius: '50%',
+                      background: count > 0 ? getColor(c, 0.15 + pct / 200) : 'transparent',
+                      color: getColor(c, 1),
+                      fontSize: '0.78rem', fontWeight: 700,
+                    }}>{count || ''}</div>
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
   );
+}
+
+function getColor(cat, opacity) {
+  const m = { Soleil: `rgba(251,191,36,${opacity})`, Nuageux: `rgba(107,114,128,${opacity})`,
+    Pluie: `rgba(59,130,246,${opacity})`, Neige: `rgba(209,213,219,${opacity})`, Vent: `rgba(236,72,153,${opacity})` };
+  return m[cat] || `rgba(255,255,255,${opacity})`;
+}
+
+function fmt(d) {
+  const [y, m, day] = d.split('-');
+  const ms = ['', 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+  return `${parseInt(day)} ${ms[parseInt(m)]}`;
 }
