@@ -1,0 +1,171 @@
+"""
+Flask REST API — Météo 2026
+endpoints:
+  GET /api/weather         ?month=&condition=
+  GET /api/weather/<date>
+  GET /api/stats           ?month=
+  GET /api/stats/monthly
+  GET /api/conditions      ?month=
+  GET /api/months
+"""
+
+import sqlite3, os
+from flask import Flask, g, jsonify, request
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+DB = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'weather.db')
+
+def get_db():
+    if 'db' not in g:
+        g.db = sqlite3.connect(DB)
+        g.db.row_factory = sqlite3.Row
+    return g.db
+
+@app.teardown_appcontext
+def close_db(exc):
+    db = g.pop('db', None)
+    if db: db.close()
+
+def dict_from_row(row):
+    return dict(row) if row else None
+
+MONTH_NAMES = {
+    1:'Janvier',2:'Février',3:'Mars',4:'Avril',5:'Mai',6:'Juin',
+    7:'Juillet',8:'Août',9:'Septembre',10:'Octobre',11:'Novembre',12:'Décembre'
+}
+
+@app.route('/api/weather')
+def get_weather():
+    db = get_db()
+    month = request.args.get('month')
+    condition = request.args.get('condition')
+
+    query = 'SELECT * FROM weather'
+    params = []
+    filters = []
+
+    if month and month != 'all':
+        filters.append("CAST(substr(date,6,2) AS INTEGER) = ?")
+        params.append(int(month))
+    if condition and condition != 'all':
+        filters.append("categorie_aprem = ?")
+        params.append(condition)
+
+    if filters:
+        query += ' WHERE ' + ' AND '.join(filters)
+    query += ' ORDER BY date ASC'
+
+    rows = db.execute(query, params).fetchall()
+    return jsonify([dict_from_row(r) for r in rows])
+
+@app.route('/api/weather/<date_str>')
+def get_weather_date(date_str):
+    db = get_db()
+    row = db.execute('SELECT * FROM weather WHERE date = ?', (date_str,)).fetchone()
+    if not row:
+        return jsonify({'error': 'not found'}), 404
+    return jsonify(dict_from_row(row))
+
+@app.route('/api/stats')
+def get_stats():
+    db = get_db()
+    month = request.args.get('month')
+
+    where = ''
+    params = []
+    if month and month != 'all':
+        where = 'WHERE CAST(substr(date,6,2) AS INTEGER) = ?'
+        params.append(int(month))
+
+    row = db.execute(f'''
+        SELECT
+            COUNT(*) as total,
+            ROUND(AVG(temp_matin), 1) as avg_matin,
+            ROUND(AVG(temp_aprem), 1) as avg_aprem,
+            ROUND(MIN(temp_matin), 1) as min_matin,
+            ROUND(MAX(temp_aprem), 1) as max_aprem
+        FROM weather {where}
+    ''', params).fetchone()
+
+    stats = dict(row)
+
+    max_row = db.execute(f'''
+        SELECT date, temp_aprem FROM weather {where}
+        ORDER BY temp_aprem DESC LIMIT 1
+    ''', params).fetchone()
+    min_row = db.execute(f'''
+        SELECT date, temp_matin FROM weather {where}
+        ORDER BY temp_matin ASC LIMIT 1
+    ''', params).fetchone()
+    soleil = db.execute(f'''
+        SELECT COUNT(*) as c FROM weather
+        WHERE categorie_aprem = 'Soleil' {("AND CAST(substr(date,6,2) AS INTEGER) = ?" if month and month != 'all' else '')}
+    ''', params).fetchone()
+
+    stats['max_date'] = max_row['date'] if max_row else None
+    stats['min_date'] = min_row['date'] if min_row else None
+    stats['soleil'] = soleil['c'] if soleil else 0
+    if stats['total']:
+        stats['pct_soleil'] = round(stats['soleil'] / stats['total'] * 100, 1)
+    return jsonify(stats)
+
+@app.route('/api/stats/monthly')
+def get_monthly_stats():
+    db = get_db()
+    rows = db.execute('''
+        SELECT
+            CAST(substr(date,6,2) AS INTEGER) as mois,
+            COUNT(*) as jours,
+            ROUND(AVG(temp_matin), 1) as avg_matin,
+            ROUND(AVG(temp_aprem), 1) as avg_aprem,
+            ROUND(MIN(temp_matin), 1) as min_matin,
+            ROUND(MAX(temp_aprem), 1) as max_aprem
+        FROM weather
+        GROUP BY mois
+        ORDER BY mois
+    ''').fetchall()
+
+    result = []
+    for r in rows:
+        d = dict(r)
+        d['mois_nom'] = MONTH_NAMES.get(d['mois'], '')
+        result.append(d)
+    return jsonify(result)
+
+@app.route('/api/conditions')
+def get_conditions():
+    db = get_db()
+    month = request.args.get('month')
+
+    query = 'SELECT categorie_aprem as cat, COUNT(*) as count FROM weather'
+    params = []
+    if month and month != 'all':
+        query += ' WHERE CAST(substr(date,6,2) AS INTEGER) = ?'
+        params.append(int(month))
+    query += ' GROUP BY cat ORDER BY count DESC'
+
+    rows = db.execute(query, params).fetchall()
+    return jsonify([dict(r) for r in rows])
+
+@app.route('/api/months')
+def get_months():
+    db = get_db()
+    rows = db.execute('''
+        SELECT DISTINCT CAST(substr(date,6,2) AS INTEGER) as num
+        FROM weather ORDER BY num
+    ''').fetchall()
+    result = [{'num': r['num'], 'nom': MONTH_NAMES[r['num']]} for r in rows]
+    return jsonify(result)
+
+@app.route('/api/health')
+def health():
+    db = get_db()
+    count = db.execute('SELECT COUNT(*) FROM weather').fetchone()[0]
+    return jsonify({'status': 'ok', 'records': count})
+
+if __name__ == '__main__':
+    print(f'meteo api — 154 records in database')
+    app.run(host='0.0.0.0', port=5000, debug=True)
