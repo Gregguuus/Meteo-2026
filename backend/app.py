@@ -9,9 +9,11 @@ endpoints:
   GET /api/months
 """
 
-import sqlite3, os
+import sqlite3, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from flask import Flask, g, jsonify, request
 from flask_cors import CORS
+from analysis import predict, get_insights, generate_summary, generate_prediction_summary
 
 app = Flask(__name__)
 CORS(app)
@@ -165,6 +167,46 @@ def health():
     db = get_db()
     count = db.execute('SELECT COUNT(*) FROM weather').fetchone()[0]
     return jsonify({'status': 'ok', 'records': count})
+
+@app.route('/api/predict')
+def get_predict():
+    days = request.args.get('days', 7, type=int)
+    return jsonify(predict(min(days, 14)))
+
+@app.route('/api/insights')
+def get_insights_api():
+    return jsonify(get_insights())
+
+@app.route('/api/summary')
+def get_summary():
+    import concurrent.futures
+    insights = get_insights()
+    if 'error' in insights:
+        return jsonify(insights)
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    future = executor.submit(generate_summary, insights)
+    try:
+        text = future.result(timeout=8)
+    except concurrent.futures.TimeoutError:
+        from analysis import _template_summary
+        text = _template_summary(insights)
+    return jsonify({'summary': text})
+
+@app.route('/api/predict/summary')
+def get_prediction_summary():
+    import concurrent.futures
+    insights = get_insights()
+    predictions = predict(7)
+    if 'error' in insights or 'error' in predictions:
+        return jsonify({'error': 'Cannot generate summary'})
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    future = executor.submit(generate_prediction_summary, predictions, insights)
+    try:
+        text = future.result(timeout=8)
+    except concurrent.futures.TimeoutError:
+        from analysis import _template_prediction
+        text = _template_prediction(predictions, insights)
+    return jsonify({'summary': text})
 
 if __name__ == '__main__':
     print(f'meteo api — 154 records in database')

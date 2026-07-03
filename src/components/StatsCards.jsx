@@ -1,40 +1,30 @@
-export default function StatsCards({ data }) {
-  const tMatin = data.filter(r => r.temp_matin != null).map(r => r.temp_matin);
-  const tAprem = data.filter(r => r.temp_aprem != null).map(r => r.temp_aprem);
-  const tmax = Math.max(...tAprem);
-  const tmin = Math.min(...tMatin);
-  const avg = (tMatin.reduce((a, b) => a + b, 0) / tMatin.length + tAprem.reduce((a, b) => a + b, 0) / tAprem.length) / 2;
-  const tmaxR = data.find(r => r.temp_aprem === tmax);
-  const tminR = data.find(r => r.temp_matin === tmin);
-  const soleil = data.filter(r => r.categorie_aprem === 'Soleil').length;
-  const soleilPct = ((soleil / data.length) * 100).toFixed(0);
-
+export default function StatsCards({ stats }) {
   const cards = [
     {
       label: 'Température moyenne',
-      value: `${avg.toFixed(1)}°`,
-      sub: 'Sur l\'ensemble des relevés',
+      value: `${stats.avg_matin ? ((stats.avg_matin + stats.avg_aprem) / 2).toFixed(1) : '—'}°`,
+      sub: `${stats.avg_matin?.toFixed(1) ?? '—'}° matin · ${stats.avg_aprem?.toFixed(1) ?? '—'}° après-midi`,
       accent: 'linear-gradient(135deg, var(--primary), #a78bfa)',
       delay: 'delay-1',
     },
     {
       label: 'Max après-midi',
-      value: `${tmax}°`,
-      sub: tmaxR ? `le ${fmt(tmaxR.date)}` : '',
+      value: `${stats.max_aprem ?? '—'}°`,
+      sub: stats.max_date ? fmt(stats.max_date) : '',
       accent: 'linear-gradient(135deg, #fb923c, #ef4444)',
       delay: 'delay-2',
     },
     {
       label: 'Min matin',
-      value: `${tmin}°`,
-      sub: tminR ? `le ${fmt(tminR.date)}` : '',
+      value: `${stats.min_matin ?? '—'}°`,
+      sub: stats.min_date ? fmt(stats.min_date) : '',
       accent: 'linear-gradient(135deg, #38bdf8, #6366f1)',
       delay: 'delay-3',
     },
     {
       label: 'Jours de soleil',
-      value: `${soleil}`,
-      sub: `${soleilPct}% des relevés`,
+      value: `${stats.soleil ?? 0}`,
+      sub: stats.pct_soleil ? `${stats.pct_soleil}% des relevés` : '',
       accent: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
       delay: 'delay-4',
     },

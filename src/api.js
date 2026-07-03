@@ -95,6 +95,46 @@ export async function fetchConditions(month = 'all') {
   }
 }
 
+export async function fetchPredictions(days = 7) {
+  try {
+    const res = await fetch(`${API_BASE}/predict?days=${days}`, { signal: AbortSignal.timeout(3000) });
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchInsights() {
+  try {
+    const res = await fetch(`${API_BASE}/insights`, { signal: AbortSignal.timeout(3000) });
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchSummary() {
+  try {
+    const res = await fetch(`${API_BASE}/summary`, { signal: AbortSignal.timeout(15000) });
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchPredictionSummary() {
+  try {
+    const res = await fetch(`${API_BASE}/predict/summary`, { signal: AbortSignal.timeout(15000) });
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchMonths() {
   try {
     const res = await fetch(`${API_BASE}/months`, { signal: AbortSignal.timeout(2000) });
