@@ -135,6 +135,15 @@ export async function fetchPredictionSummary() {
   }
 }
 
+export async function addWeather(record) {
+  const res = await fetch(`${API_BASE}/weather`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(record),
+  });
+  return await res.json();
+}
+
 export async function fetchForecast() {
   try {
     const res = await fetch(`${API_BASE}/forecast`, { signal: AbortSignal.timeout(5000) });

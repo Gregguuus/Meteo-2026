@@ -162,6 +162,29 @@ def get_months():
     result = [{'num': r['num'], 'nom': MONTH_NAMES[r['num']]} for r in rows]
     return jsonify(result)
 
+@app.route('/api/weather', methods=['POST'])
+def add_weather():
+    """Add or update a weather record."""
+    db = get_db()
+    body = request.get_json()
+    if not body or 'date' not in body:
+        return jsonify({'error': 'date required'}), 400
+
+    date = body['date']
+    temp_matin = body.get('temp_matin')
+    temp_aprem = body.get('temp_aprem')
+    categorie_aprem = body.get('categorie_aprem')
+
+    existing = db.execute('SELECT date FROM weather WHERE date = ?', (date,)).fetchone()
+    if existing:
+        db.execute('''UPDATE weather SET temp_matin=?, temp_aprem=?, categorie_aprem=?
+                      WHERE date=?''', (temp_matin, temp_aprem, categorie_aprem, date))
+    else:
+        db.execute('''INSERT INTO weather (date, temp_matin, temp_aprem, categorie_aprem)
+                      VALUES (?, ?, ?, ?)''', (date, temp_matin, temp_aprem, categorie_aprem))
+    db.commit()
+    return jsonify({'status': 'ok', 'date': date})
+
 @app.route('/api/health')
 def health():
     db = get_db()

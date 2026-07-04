@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   ResponsiveContainer, AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
@@ -7,7 +7,7 @@ import {
   fetchWeather, fetchStats, fetchMonthlyStats,
   fetchConditions, fetchMonths, fetchPredictions,
   fetchInsights, fetchSummary, fetchPredictionSummary,
-  fetchForecast,
+  fetchForecast, addWeather,
 } from './api';
 
 const MONTHS = { 1:'Janvier',2:'Février',3:'Mars',4:'Avril',5:'Mai',6:'Juin',7:'Juillet',8:'Août',9:'Septembre',10:'Octobre',11:'Novembre',12:'Décembre' };
@@ -26,6 +26,35 @@ export default function App() {
   const [summary, setSummary] = useState(null);
   const [predSummary, setPredSummary] = useState(null);
   const [forecast, setForecast] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({ date: new Date().toISOString().slice(0,10), temp_matin: '', temp_aprem: '', categorie_aprem: 'Soleil' });
+  const [formMsg, setFormMsg] = useState('');
+
+  const handleAdd = useCallback(async () => {
+    if (!formData.date) return;
+    setFormMsg('Enregistrement…');
+    const r = await addWeather({
+      date: formData.date,
+      temp_matin: formData.temp_matin ? parseFloat(formData.temp_matin) : null,
+      temp_aprem: formData.temp_aprem ? parseFloat(formData.temp_aprem) : null,
+      categorie_aprem: formData.categorie_aprem,
+    });
+    if (r.status === 'ok') {
+      setFormMsg('✅ Ajouté ! Rechargez la page');
+      // refresh data after short delay
+      setTimeout(async () => {
+        const [d, s, ms, c, p, i, su] = await Promise.all([
+          fetchWeather(), fetchStats(), fetchMonthlyStats(),
+          fetchConditions(), fetchPredictions(7), fetchInsights(), fetchSummary(),
+        ]);
+        setData(d); setStats(s); setMonthlyStats(ms); setConditions(c);
+        setPredictions(p); setInsights(i); setSummary(su);
+        setShowForm(false); setFormMsg('');
+      }, 500);
+    } else {
+      setFormMsg('Erreur: ' + (r.error || ''));
+    }
+  }, [formData]);
   const [loading, setLoading] = useState(true);
   const [visibleSections, setVisibleSections] = useState(new Set());
 
@@ -266,6 +295,72 @@ export default function App() {
       )}
 
 
+
+      {/* Floating add button */}
+      <button onClick={() => setShowForm(true)} style={{
+        position:'fixed', bottom:24, right:24, zIndex:100,
+        width:52, height:52, borderRadius:'50%', border:'none',
+        background:'linear-gradient(135deg, var(--accent-blue), #7c5cfc)',
+        color:'#fff', fontSize:24, fontWeight:300, cursor:'pointer',
+        boxShadow:'0 4px 24px rgba(79,110,247,0.3)',
+        transition:'transform 0.2s', display:'flex', alignItems:'center', justifyContent:'center',
+      }} onMouseOver={e => e.target.style.transform='scale(1.1)'}
+         onMouseOut={e => e.target.style.transform='scale(1)'}>+</button>
+
+      {/* Add form modal */}
+      {showForm && (
+        <div style={{
+          position:'fixed', inset:0, zIndex:200,
+          background:'rgba(0,0,0,0.6)', backdropFilter:'blur(8px)',
+          display:'flex', alignItems:'center', justifyContent:'center', padding:20,
+        }} onClick={() => { setShowForm(false); setFormMsg(''); }}>
+          <div className="glass" style={{ padding:28, width:'100%', maxWidth:380 }} onClick={e => e.stopPropagation()}>
+            <h3 style={{ fontSize:'1rem', fontWeight:700, marginBottom:4 }}>Ajouter un relevé</h3>
+            <p style={{ fontSize:'0.75rem', color:'var(--text-tertiary)', marginBottom:16 }}>
+              Nouvelle donnée pour Bouffémont
+            </p>
+            <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+              <input type="date" value={formData.date}
+                onChange={e => setFormData(p => ({...p, date: e.target.value}))}
+                className="add-input" />
+              <div style={{ display:'flex', gap:8 }}>
+                <input type="number" step="0.1" placeholder="Matin °C"
+                  value={formData.temp_matin}
+                  onChange={e => setFormData(p => ({...p, temp_matin: e.target.value}))}
+                  className="add-input" />
+                <input type="number" step="0.1" placeholder="Après-midi °C"
+                  value={formData.temp_aprem}
+                  onChange={e => setFormData(p => ({...p, temp_aprem: e.target.value}))}
+                  className="add-input" />
+              </div>
+              <select value={formData.categorie_aprem}
+                onChange={e => setFormData(p => ({...p, categorie_aprem: e.target.value}))}
+                className="add-input">
+                <option value="Soleil">☀️ Soleil</option>
+                <option value="Nuageux">☁️ Nuageux</option>
+                <option value="Pluie">🌧️ Pluie</option>
+                <option value="Neige">❄️ Neige</option>
+                <option value="Vent">💨 Vent</option>
+              </select>
+              <button onClick={handleAdd} style={{
+                padding:'10px 0', borderRadius:10, border:'none', marginTop:4,
+                background:'linear-gradient(135deg, var(--accent-blue), #7c5cfc)',
+                color:'#fff', fontWeight:600, fontSize:'0.85rem', cursor:'pointer',
+              }}>{formMsg || 'Enregistrer'}</button>
+              <button onClick={() => { setShowForm(false); setFormMsg(''); }} style={{
+                background:'transparent', border:'none', color:'var(--text-tertiary)',
+                fontSize:'0.75rem', cursor:'pointer', padding:4,
+              }}>Annuler</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        .add-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: #fff; padding: 10px 12px; font-size: 0.85rem; font-family: inherit; outline: none; width: 100%; }
+        .add-input:focus { border-color: var(--accent-blue); }
+        .add-input::placeholder { color: var(--text-tertiary); }
+      `}</style>
 
       <div className="footer">
         <div className="container">
