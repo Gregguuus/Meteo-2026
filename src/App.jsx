@@ -7,6 +7,7 @@ import {
   fetchWeather, fetchStats, fetchMonthlyStats,
   fetchConditions, fetchMonths, fetchPredictions,
   fetchInsights, fetchSummary, fetchPredictionSummary,
+  fetchForecast,
 } from './api';
 
 const MONTHS = { 1:'Janvier',2:'Février',3:'Mars',4:'Avril',5:'Mai',6:'Juin',7:'Juillet',8:'Août',9:'Septembre',10:'Octobre',11:'Novembre',12:'Décembre' };
@@ -24,19 +25,21 @@ export default function App() {
   const [insights, setInsights] = useState(null);
   const [summary, setSummary] = useState(null);
   const [predSummary, setPredSummary] = useState(null);
+  const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(true);
   const [visibleSections, setVisibleSections] = useState(new Set());
 
   useEffect(() => {
     async function load() {
-      const [d, s, ms, c, m, p, i, su, ps] = await Promise.all([
+      const [d, s, ms, c, m, p, i, su, ps, f] = await Promise.all([
         fetchWeather(), fetchStats(), fetchMonthlyStats(),
         fetchConditions(), fetchMonths(), fetchPredictions(7),
         fetchInsights(), fetchSummary(), fetchPredictionSummary(),
+        fetchForecast(),
       ]);
       setData(d); setStats(s); setMonthlyStats(ms); setConditions(c);
       setMonths(m); setPredictions(p); setInsights(i);
-      setSummary(su); setPredSummary(ps); setLoading(false);
+      setSummary(su); setPredSummary(ps); setForecast(f); setLoading(false);
     }
     load();
   }, []);
@@ -178,9 +181,10 @@ export default function App() {
             </div>
           </div>
           <div className="bento">
-            {predictions && (
+            {predictions && forecast && (
               <div className={`glass span2 scale-in ${visible('previsions') ? 'visible' : ''}`} style={{ padding: 24 }}>
-                <PredictionChart predictions={predictions} data={data} />
+                <div className="section-label" style={{ marginBottom: 8 }}>Comparaison : régression vs Open-Meteo</div>
+                <ForecastChart predictions={predictions} forecast={forecast} />
               </div>
             )}
             <div className={`glass scale-in ${visible('previsions') ? 'visible' : ''}`} style={{ padding: 24 }}>
@@ -190,6 +194,19 @@ export default function App() {
               ) : (
                 <div className="prediction-text" style={{ color: 'var(--text-tertiary)' }}>
                   Utilise Ollama pour un résumé en langage naturel. Sinon, un template structuré est affiché.
+                </div>
+              )}
+              {forecast && (
+                <div style={{ marginTop: 16, padding: '12px 14px', borderRadius: 10, background: 'rgba(79,110,247,0.06)', border: '1px solid rgba(79,110,247,0.1)' }}>
+                  <div style={{ fontSize:'0.65rem', textTransform:'uppercase', letterSpacing:'0.5px', color:'var(--text-tertiary)', marginBottom:6 }}>
+                    🌐 Open-Meteo — données réelles
+                  </div>
+                  {forecast.slice(0, 3).map(d => (
+                    <div key={d.date} style={{ display:'flex', justifyContent:'space-between', fontSize:'0.78rem', marginBottom:3 }}>
+                      <span>{fmtDate(d.date)}</span>
+                      <span>{COND[d.condition]} {d.temp_min}° / {d.temp_max}°</span>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
@@ -552,6 +569,37 @@ function MonthlyTable({ monthlyStats }) {
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+// ── ForecastChart ──
+function ForecastChart({ predictions, forecast }) {
+  const cd = predictions.map((p, i) => {
+    const f = forecast[i];
+    return {
+      date: p.date.slice(5),
+      pred_matin: p.temp_matin,
+      pred_aprem: p.temp_aprem,
+      real_min: f?.temp_min,
+      real_max: f?.temp_max,
+    };
+  });
+  return (
+    <div className="chart-wrap" style={{ height: 240 }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart data={cd} margin={{ top:4, right:4, bottom:0, left:-12 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" tick={{ fontSize:10 }} />
+          <YAxis domain={['dataMin - 3', 'dataMax + 3']} tick={{ fontSize:10 }} />
+          <Tooltip />
+          <Legend />
+          <Area type="monotone" dataKey="pred_matin" stroke="#a78bfa" strokeWidth={2} strokeDasharray="5 4" fill="none" name="Prédiction matin" />
+          <Area type="monotone" dataKey="pred_aprem" stroke="#f97316" strokeWidth={2} strokeDasharray="5 4" fill="none" name="Prédiction après-midi" />
+          <Area type="monotone" dataKey="real_min" stroke="#4f6ef7" strokeWidth={2} fill="none" name="Open-Meteo min" dot={{ r:3 }} />
+          <Area type="monotone" dataKey="real_max" stroke="#22c55e" strokeWidth={2} fill="none" name="Open-Meteo max" dot={{ r:3 }} />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   );
 }

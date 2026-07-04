@@ -9,7 +9,7 @@ endpoints:
   GET /api/months
 """
 
-import sqlite3, os, sys
+import sqlite3, os, sys, urllib.request, json, ssl
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from flask import Flask, g, jsonify, request
 from flask_cors import CORS
@@ -191,6 +191,40 @@ def get_summary():
         from analysis import _template_summary
         text = _template_summary(insights)
     return jsonify({'summary': text})
+
+WMO_CODES = {0:'Soleil',1:'Soleil',2:'Nuageux',3:'Nuageux',45:'Brouillard',48:'Brouillard',51:'Pluie',53:'Pluie',55:'Pluie',61:'Pluie',63:'Pluie',65:'Pluie',71:'Neige',73:'Neige',75:'Neige',80:'Pluie',81:'Pluie',82:'Pluie',85:'Neige',86:'Neige',95:'Orage',96:'Orage',99:'Orage'}
+
+@app.route('/api/forecast')
+def get_forecast():
+    """Proxy to Open-Meteo (free, no key) for Givrand/Pornic."""
+    url = ("https://api.open-meteo.com/v1/forecast?"
+           "latitude=46.67&longitude=-1.88"
+           "&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum"
+           "&timezone=Europe/Paris&forecast_days=7")
+    try:
+        ctx = ssl.create_default_context()
+        try:
+            import certifi
+            ctx.load_verify_locations(certifi.where())
+        except ImportError:
+            pass
+        req = urllib.request.Request(url, headers={'User-Agent': 'Meteo2026/1.0'})
+        with urllib.request.urlopen(req, timeout=5, context=ctx) as resp:
+            data = json.loads(resp.read())
+        daily = data.get('daily', {})
+        result = []
+        for i, date in enumerate(daily.get('time', [])):
+            wmo = daily['weathercode'][i]
+            result.append({
+                'date': date,
+                'temp_max': daily['temperature_2m_max'][i],
+                'temp_min': daily['temperature_2m_min'][i],
+                'condition': WMO_CODES.get(wmo, 'Nuageux'),
+                'precipitation': daily['precipitation_sum'][i],
+            })
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/predict/summary')
 def get_prediction_summary():

@@ -135,6 +135,16 @@ export async function fetchPredictionSummary() {
   }
 }
 
+export async function fetchForecast() {
+  try {
+    const res = await fetch(`${API_BASE}/forecast`, { signal: AbortSignal.timeout(5000) });
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchMonths() {
   try {
     const res = await fetch(`${API_BASE}/months`, { signal: AbortSignal.timeout(2000) });
