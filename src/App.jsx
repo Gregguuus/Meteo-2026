@@ -265,35 +265,7 @@ export default function App() {
         </section>
       )}
 
-      {/* ═══════ DONNÉES ═══════ */}
-      <section className="section" data-section="donnees" id="donnees">
-        <div className="container">
-          <div className={`fade-up ${visible('donnees') ? 'visible' : ''}`}>
-            <div className="section-header">
-              <div className="section-label">Archive</div>
-              <h2>Tous les <span className="highlight">relevés</span></h2>
-              <div className="section-sub">{stats?.total || data.length} jours de données.</div>
-            </div>
-          </div>
-          <div className={`glass scale-in ${visible('donnees') ? 'visible' : ''}`} style={{ padding: '12px 20px', maxHeight: 500, overflowY: 'auto' }}>
-            <table className="data-table">
-              <thead>
-                <tr><th>Date</th><th>Matin</th><th>Après-midi</th><th>Condition</th></tr>
-              </thead>
-              <tbody>
-                {data.map(r => (
-                  <tr key={r.date}>
-                    <td style={{ fontWeight: 600 }}>{fmtDate(r.date)}</td>
-                    <td><span className={r.temp_matin < 2 ? 'temp-cold' : ''}>{r.temp_matin != null ? `${r.temp_matin}°` : '—'}</span></td>
-                    <td><span className={r.temp_aprem >= 30 ? 'temp-hot' : ''}>{r.temp_aprem != null ? `${r.temp_aprem}°` : '—'}</span></td>
-                    <td>{COND[r.categorie_aprem] || ''} {r.categorie_aprem || '—'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
+
 
       <div className="footer">
         <div className="container">
