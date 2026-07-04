@@ -705,10 +705,10 @@ function RadarMap() {
   const pos = [49.0442, 2.3000];
 
   useEffect(() => {
-    fetch('https://api.rainviewer.com/publish/radar/nc/current.json')
+    fetch('https://api.rainviewer.com/public/weather-maps.json')
       .then(r => r.json())
       .then(d => {
-        const all = [...(d.radar?.past || []), ...(d.radar?.nowcast || [])];
+        const all = [...(d.radar?.past || [])];
         setFrames(all);
       })
       .catch(() => setFrames([]));
@@ -732,7 +732,7 @@ function RadarMap() {
   }
 
   const frame = frames[frameIdx];
-  const tileUrl = `https://tilecache.rainviewer.com${frame.path}/256/{z}/{x}/{y}/2/1_1.png`;
+  const tileUrl = `https://tilecache.rainviewer.com/v2/radar/${frame.time}/256/{z}/{x}/{y}/2/1_1.png`;
   const bounds = [[-90, -180], [90, 180]];
 
   return (
