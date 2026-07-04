@@ -76,10 +76,10 @@ export default function App() {
             <span className="dot" /> Mise à jour en temps réel
           </div>
           <h1 className="fade-up d2">
-            Météo <span className="gradient">2026</span>
+            Météo Bouffémont <span className="gradient">2026</span>
           </h1>
           <p className="fade-up d3">
-            Relevés météo personnels de Givrand et Pornic, Vendée. 
+            Relevés météo personnels de Bouffémont, Val-d'Oise. 
             {summary?.summary ? ` ${summary.summary}` : ' 154 jours de données enregistrées de janvier à juillet 2026.'}
           </p>
 
@@ -297,7 +297,7 @@ export default function App() {
 
       <div className="footer">
         <div className="container">
-          Météo 2026 · Relevés personnels · Givrand & Pornic, Vendée<br />
+          Météo 2026 · Relevés personnels · Bouffémont, Val-d'Oise<br />
           Python / Flask / SQLite · React · Recharts · Ollama IA
         </div>
       </div>

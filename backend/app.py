@@ -196,9 +196,9 @@ WMO_CODES = {0:'Soleil',1:'Soleil',2:'Nuageux',3:'Nuageux',45:'Brouillard',48:'B
 
 @app.route('/api/forecast')
 def get_forecast():
-    """Proxy to Open-Meteo (free, no key) for Givrand/Pornic."""
+    """Proxy to Open-Meteo (free, no key) for Bouffémont."""
     url = ("https://api.open-meteo.com/v1/forecast?"
-           "latitude=46.67&longitude=-1.88"
+           "latitude=49.0442&longitude=2.3000"
            "&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum"
            "&timezone=Europe/Paris&forecast_days=7")
     try:

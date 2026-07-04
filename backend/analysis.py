@@ -227,7 +227,7 @@ def generate_summary(insights):
         return "Données insuffisantes pour générer un résumé."
 
     try:
-        prompt = f"""Tu es un météorologue. Résume ces données météo de Givrand/Pornic (Vendée) en 3-4 phrases en français, style bulletin météo TV :
+        prompt = f"""Tu es un météorologue. Résume ces données météo de Bouffémont (Val-d'Oise) en 3-4 phrases en français, style bulletin météo TV :
 
 {json.dumps(insights, indent=2, ensure_ascii=False)}
 
@@ -246,7 +246,7 @@ Réponds uniquement avec le texte du résumé, sans introduction."""
 def generate_prediction_summary(predictions, insights):
     """Generate a French prediction summary — Ollama or template."""
     try:
-        prompt = f"""Tu es un météorologue. Fais une prévision météo pour les 7 prochains jours à Givrand/Pornic (Vendée) en 2-3 phrases en français, basée sur ces données :
+        prompt = f"""Tu es un météorologue. Fais une prévision météo pour les 7 prochains jours à Bouffémont (Val-d'Oise) en 2-3 phrases en français, basée sur ces données :
 
 Prévisions: {json.dumps(predictions, ensure_ascii=False)}
 
@@ -270,7 +270,7 @@ def _template_summary(insights):
     parts = []
 
     avg = round((g.get('avg_matin', 0) + g.get('avg_aprem', 0)) / 2, 1)
-    parts.append(f"Sur l'ensemble des relevés, la température moyenne à Givrand et Pornic est de {avg}°C.")
+    parts.append(f"Sur l'ensemble des relevés, la température moyenne à Bouffémont est de {avg}°C.")
 
     if insights.get('heatwaves'):
         h = insights['heatwaves'][0]
