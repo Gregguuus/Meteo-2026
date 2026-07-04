@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   ResponsiveContainer, AreaChart, Area, BarChart, Bar,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
+import { MapContainer, TileLayer, ImageOverlay, useMap } from 'react-leaflet';
 import {
   fetchWeather, fetchStats, fetchMonthlyStats,
   fetchConditions, fetchMonths, fetchPredictions,
@@ -139,8 +140,14 @@ export default function App() {
               <div className="section-sub">Les températures du matin et de l'après-midi, de janvier à juillet.</div>
             </div>
           </div>
-          <div className={`glass full scale-in ${visible('evolution') ? 'visible' : ''}`} style={{ padding: 24 }}>
-            <TempChart data={data} />
+          <div className="bento">
+            <div className={`glass span2 scale-in ${visible('evolution') ? 'visible' : ''}`} style={{ padding: 24 }}>
+              <TempChart data={data} />
+            </div>
+            <div className={`glass scale-in ${visible('evolution') ? 'visible' : ''}`} style={{ padding: 24 }}>
+              <div className="section-label" style={{ marginBottom: 12 }}>Écart à la moyenne mensuelle</div>
+              <DeviationChart data={data} monthlyStats={monthlyStats} />
+            </div>
           </div>
         </div>
       </section>
@@ -239,6 +246,22 @@ export default function App() {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════ RADAR ═══════ */}
+      <section className="section" data-section="radar" id="radar">
+        <div className="container">
+          <div className={`fade-up ${visible('radar') ? 'visible' : ''}`}>
+            <div className="section-header">
+              <div className="section-label">Radar en direct</div>
+              <h2>Précipitations <span className="highlight">temps réel</span></h2>
+              <div className="section-sub">Données radar RainViewer — animation des précipitations sur Bouffémont.</div>
+            </div>
+          </div>
+          <div className={`glass full scale-in ${visible('radar') ? 'visible' : ''}`} style={{ padding: 10 }}>
+            <RadarMap />
           </div>
         </div>
       </section>
@@ -639,6 +662,125 @@ function MonthlyTable({ monthlyStats }) {
     </div>
   );
 }
+
+// ── DeviationChart ──
+function DeviationChart({ data, monthlyStats }) {
+  const avgByMonth = {};
+  for (const m of monthlyStats) avgByMonth[m.mois] = m.avg_aprem;
+
+  const cd = data.map(r => {
+    const month = parseInt(r.date.split('-')[1]);
+    const avg = avgByMonth[month] || 0;
+    const temp = r.temp_aprem ?? r.temp_matin ?? 0;
+    return { date: r.date.slice(5), diff: +(temp - avg).toFixed(1), temp };
+  });
+
+  return (
+    <div className="chart-wrap" style={{ height: 260 }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={cd} margin={{ top:4, right:4, bottom:0, left:-12 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" tick={{ fontSize:8 }} interval={6} />
+          <YAxis tick={{ fontSize:9 }} />
+          <Tooltip />
+          <ReferenceLine y={0} stroke="rgba(255,255,255,0.2)" />
+          <Bar dataKey="diff" name="Écart °C"
+            shape={(p) => {
+              const fill = p.payload.diff >= 0 ? '#fb923c' : '#38bdf8';
+              const opacity = Math.min(1, 0.2 + Math.abs(p.payload.diff) * 0.05);
+              return <rect x={p.x} y={p.y} width={p.width} height={p.height} fill={fill} fillOpacity={opacity} rx={1} />;
+            }} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+// ── RadarMap ──
+function RadarMap() {
+  const [frames, setFrames] = useState([]);
+  const [frameIdx, setFrameIdx] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  const timer = useRef(null);
+  const pos = [49.0442, 2.3000];
+
+  useEffect(() => {
+    fetch('https://api.rainviewer.com/publish/radar/nc/current.json')
+      .then(r => r.json())
+      .then(d => {
+        const all = [...(d.radar?.past || []), ...(d.radar?.nowcast || [])];
+        setFrames(all);
+      })
+      .catch(() => setFrames([]));
+  }, []);
+
+  useEffect(() => {
+    if (!playing || !frames.length) return;
+    const interval = setInterval(() => {
+      setFrameIdx(i => (i + 1) % frames.length);
+    }, 800);
+    timer.current = interval;
+    return () => clearInterval(interval);
+  }, [playing, frames.length]);
+
+  if (!frames.length) {
+    return (
+      <div style={{ height: 400, display:'flex', alignItems:'center', justifyContent:'center', color:'var(--text-secondary)', fontSize:'0.85rem' }}>
+        Chargement radar…
+      </div>
+    );
+  }
+
+  const frame = frames[frameIdx];
+  const tileUrl = `https://tilecache.rainviewer.com${frame.path}/256/{z}/{x}/{y}/2/1_1.png`;
+  const bounds = [[-90, -180], [90, 180]];
+
+  return (
+    <div style={{ position:'relative', borderRadius: 12, overflow: 'hidden' }}>
+      <MapContainer center={pos} zoom={9} style={{ height: 420, width:'100%', background:'#06060e' }}
+        zoomControl={false} attributionControl={false}>
+        <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+        <ImageOverlay url={tileUrl} bounds={bounds} opacity={0.55} />
+        <MapCenter pos={pos} />
+      </MapContainer>
+      <div style={{
+        position:'absolute', bottom:12, left:12, right:12, zIndex:1000,
+        display:'flex', alignItems:'center', gap:10,
+        padding:'6px 12px', borderRadius:10,
+        background:'rgba(6,6,14,0.85)', backdropFilter:'blur(12px)',
+        border:'1px solid rgba(255,255,255,0.06)',
+      }}>
+        <button onClick={() => setPlaying(p => !p)} style={btnStyle}>
+          {playing ? '⏸' : '▶'}
+        </button>
+        <div style={{
+          flex:1, height:4, borderRadius:2, background:'rgba(255,255,255,0.08)', position:'relative',
+        }}>
+          <div style={{
+            width:`${(frameIdx / frames.length) * 100}%`, height:'100%', borderRadius:2,
+            background:'linear-gradient(90deg, var(--accent-blue), #7c5cfc)',
+            transition:'width 0.3s',
+          }} />
+        </div>
+        <span style={{ fontSize:'0.65rem', color:'var(--text-tertiary)', whiteSpace:'nowrap', minWidth:36 }}>
+          {frame.time?.slice(8, 10)}h{frame.time?.slice(10, 12)}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function MapCenter({ pos }) {
+  const map = useMap();
+  useEffect(() => { map.setView(pos, 9); }, []);
+  return null;
+}
+
+const btnStyle = {
+  background:'rgba(255,255,255,0.06)', border:'none', borderRadius:8,
+  width:32, height:32, fontSize:14, cursor:'pointer', color:'#fff',
+  display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0,
+};
 
 // ── ForecastChart ──
 function ForecastChart({ predictions, forecast }) {
