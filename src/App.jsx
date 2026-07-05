@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, AreaChart, Area, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
-import { MapContainer, TileLayer, ImageOverlay, useMap } from 'react-leaflet';
+import RadarMap from './components/RadarMap';
 import {
   fetchWeather, fetchStats, fetchMonthlyStats,
   fetchConditions, fetchMonths, fetchPredictions,
@@ -695,92 +695,6 @@ function DeviationChart({ data, monthlyStats }) {
     </div>
   );
 }
-
-// ── RadarMap ──
-function RadarMap() {
-  const [frames, setFrames] = useState([]);
-  const [frameIdx, setFrameIdx] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const timer = useRef(null);
-  const pos = [49.0442, 2.3000];
-
-  useEffect(() => {
-    fetch('https://api.rainviewer.com/public/weather-maps.json')
-      .then(r => r.json())
-      .then(d => {
-        const all = [...(d.radar?.past || [])];
-        setFrames(all);
-      })
-      .catch(() => setFrames([]));
-  }, []);
-
-  useEffect(() => {
-    if (!playing || !frames.length) return;
-    const interval = setInterval(() => {
-      setFrameIdx(i => (i + 1) % frames.length);
-    }, 800);
-    timer.current = interval;
-    return () => clearInterval(interval);
-  }, [playing, frames.length]);
-
-  if (!frames.length) {
-    return (
-      <div style={{ height: 400, display:'flex', alignItems:'center', justifyContent:'center', color:'var(--text-secondary)', fontSize:'0.85rem' }}>
-        Chargement radar…
-      </div>
-    );
-  }
-
-  const frame = frames[frameIdx];
-  const tileUrl = `https://tilecache.rainviewer.com/v2/radar/${frame.time}/256/{z}/{x}/{y}/2/1_1.png`;
-  const bounds = [[-90, -180], [90, 180]];
-
-  return (
-    <div style={{ position:'relative', borderRadius: 12, overflow: 'hidden' }}>
-      <MapContainer center={pos} zoom={9} style={{ height: 420, width:'100%', background:'#06060e' }}
-        zoomControl={false} attributionControl={false}>
-        <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
-        <ImageOverlay url={tileUrl} bounds={bounds} opacity={0.55} />
-        <MapCenter pos={pos} />
-      </MapContainer>
-      <div style={{
-        position:'absolute', bottom:12, left:12, right:12, zIndex:1000,
-        display:'flex', alignItems:'center', gap:10,
-        padding:'6px 12px', borderRadius:10,
-        background:'rgba(6,6,14,0.85)', backdropFilter:'blur(12px)',
-        border:'1px solid rgba(255,255,255,0.06)',
-      }}>
-        <button onClick={() => setPlaying(p => !p)} style={btnStyle}>
-          {playing ? '⏸' : '▶'}
-        </button>
-        <div style={{
-          flex:1, height:4, borderRadius:2, background:'rgba(255,255,255,0.08)', position:'relative',
-        }}>
-          <div style={{
-            width:`${(frameIdx / frames.length) * 100}%`, height:'100%', borderRadius:2,
-            background:'linear-gradient(90deg, var(--accent-blue), #7c5cfc)',
-            transition:'width 0.3s',
-          }} />
-        </div>
-        <span style={{ fontSize:'0.65rem', color:'var(--text-tertiary)', whiteSpace:'nowrap', minWidth:36 }}>
-          {frame.time?.slice(8, 10)}h{frame.time?.slice(10, 12)}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function MapCenter({ pos }) {
-  const map = useMap();
-  useEffect(() => { map.setView(pos, 9); }, []);
-  return null;
-}
-
-const btnStyle = {
-  background:'rgba(255,255,255,0.06)', border:'none', borderRadius:8,
-  width:32, height:32, fontSize:14, cursor:'pointer', color:'#fff',
-  display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0,
-};
 
 // ── ForecastChart ──
 function ForecastChart({ predictions, forecast }) {
