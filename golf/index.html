@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1f6f43">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mon Golf">
+  <title>Mon Golf</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>⛳ Mon Golf</h1>
+    <div id="loc-status" class="loc-status">Localisation…</div>
+  </header>
+
+  <div id="banner" class="banner hidden"></div>
+
+  <main>
+    <!-- ACCUEIL -->
+    <section id="tab-accueil" class="tab active">
+      <div class="card" id="weather-card">
+        <h2>Météo en direct</h2>
+        <div id="weather">Chargement…</div>
+      </div>
+      <div class="card">
+        <h2>En bref</h2>
+        <div id="summary" class="grid3"></div>
+      </div>
+      <div class="card">
+        <h2>Dernières séances</h2>
+        <ul id="recent-sessions" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- ENTRAINEMENT -->
+    <section id="tab-entrainement" class="tab">
+      <div class="card">
+        <h2>Nouvelle séance</h2>
+        <form id="session-form" class="form">
+          <label>Date <input type="date" name="date" required></label>
+          <label>Type
+            <select name="type">
+              <option>Practice</option><option>Putting</option><option>Petit jeu</option>
+              <option>Bunker</option><option>Parcours</option><option>Physique</option>
+            </select>
+          </label>
+          <div class="row">
+            <label>Durée (min) <input type="number" name="duration" min="0" value="60"></label>
+            <label>Balles <input type="number" name="balls" min="0" value="0"></label>
+          </div>
+          <label>Ressenti
+            <select name="feeling">
+              <option value="1">😣 1</option><option value="2">😕 2</option><option value="3" selected>😐 3</option>
+              <option value="4">🙂 4</option><option value="5">🤩 5</option>
+            </select>
+          </label>
+          <label>Notes <textarea name="notes" rows="3" placeholder="Ce que j'ai travaillé, ce qui marche…"></textarea></label>
+          <button class="btn primary" type="submit">Enregistrer la séance</button>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Historique</h2>
+        <ul id="sessions" class="list"></ul>
+      </div>
+      <div class="card">
+        <h2>Mes distances par club</h2>
+        <table class="clubs"><thead><tr><th>Club</th><th>Distance (m)</th></tr></thead><tbody id="clubs"></tbody></table>
+      </div>
+    </section>
+
+    <!-- SWING -->
+    <section id="tab-swing" class="tab">
+      <div class="card">
+        <h2>Filmer mon swing</h2>
+        <video id="preview" class="video" playsinline muted autoplay></video>
+        <div class="row">
+          <select id="swing-club"></select>
+          <input id="swing-note" type="text" placeholder="Note (ex : backswing trop court)">
+        </div>
+        <div class="row">
+          <button class="btn" id="cam-start">📷 Caméra</button>
+          <button class="btn primary" id="rec-btn" disabled>⏺ Enregistrer</button>
+        </div>
+        <label class="btn file">📁 Importer une vidéo
+          <input type="file" id="swing-file" accept="video/*" hidden>
+        </label>
+        <p class="hint">Astuce : posez le téléphone à hauteur de hanches, face à vous ou dans l'axe de la cible.</p>
+      </div>
+      <div class="card hidden" id="player-card">
+        <h2 id="player-title">Lecture</h2>
+        <video id="player" class="video" playsinline controls></video>
+        <div class="row wrap">
+          <button class="btn sm" data-rate="0.25">×0.25</button>
+          <button class="btn sm" data-rate="0.5">×0.5</button>
+          <button class="btn sm" data-rate="1">×1</button>
+          <button class="btn sm" id="frame-back">◀ image</button>
+          <button class="btn sm" id="frame-fwd">image ▶</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Mes swings</h2>
+        <ul id="swings" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section id="tab-insta" class="tab">
+      <div class="card">
+        <h2>Mes signets Instagram golf</h2>
+        <form id="insta-form" class="form">
+          <label>Lien Instagram <input type="url" name="url" placeholder="https://www.instagram.com/reel/…" required></label>
+          <label>Titre <input type="text" name="title" placeholder="Ex : drill de putting à 3 tees"></label>
+          <label>Catégorie
+            <select name="cat">
+              <option>Swing</option><option>Drive</option><option>Fers</option><option>Petit jeu</option>
+              <option>Putting</option><option>Bunker</option><option>Mental</option><option>Physique</option><option>Autre</option>
+            </select>
+          </label>
+          <button class="btn primary" type="submit">Ajouter</button>
+        </form>
+        <p class="hint">Instagram ne permet à aucune application de lire vos « Enregistrements ». Pour ajouter un post : dans Instagram, touchez <b>Partager → Copier le lien</b> et collez-le ici. Sur Android, si l'app est installée, vous pouvez aussi faire <b>Partager → Mon Golf</b>.</p>
+      </div>
+      <div class="card">
+        <div class="row wrap" id="insta-filters"></div>
+        <ul id="insta" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- PARCOURS -->
+    <section id="tab-parcours" class="tab">
+      <div class="card" id="round-setup">
+        <h2>Nouvelle partie</h2>
+        <form id="round-form" class="form">
+          <label>Parcours <input type="text" name="course" id="course-name" placeholder="Nom du golf"></label>
+          <label>Trous
+            <select name="holes"><option value="18">18 trous</option><option value="9">9 trous</option></select>
+          </label>
+          <button class="btn primary" type="submit">Démarrer la carte de score</button>
+        </form>
+      </div>
+      <div class="card hidden" id="round-live">
+        <div class="round-head">
+          <div>
+            <h2 id="round-title"></h2>
+            <div id="round-total" class="big"></div>
+          </div>
+          <div id="mini-weather" class="mini-weather"></div>
+        </div>
+        <div class="hole-nav">
+          <button class="btn" id="hole-prev">◀</button>
+          <div class="hole-num">Trou <span id="hole-n">1</span></div>
+          <button class="btn" id="hole-next">▶</button>
+        </div>
+        <div class="hole-grid">
+          <div class="counter"><span>Par</span><button data-f="par" data-d="-1">−</button><b id="v-par">4</b><button data-f="par" data-d="1">+</button></div>
+          <div class="counter"><span>Coups</span><button data-f="strokes" data-d="-1">−</button><b id="v-strokes">0</b><button data-f="strokes" data-d="1">+</button></div>
+          <div class="counter"><span>Putts</span><button data-f="putts" data-d="-1">−</button><b id="v-putts">0</b><button data-f="putts" data-d="1">+</button></div>
+        </div>
+        <div class="row">
+          <span class="lbl">Fairway</span>
+          <button class="btn sm toggle" data-fw="yes">✔ touché</button>
+          <button class="btn sm toggle" data-fw="no">✘ manqué</button>
+        </div>
+        <div class="scroll-x"><table class="scorecard" id="scorecard"></table></div>
+        <div class="row">
+          <button class="btn primary" id="round-finish">Terminer la partie</button>
+          <button class="btn danger" id="round-cancel">Abandonner</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Mes parties</h2>
+        <div id="round-stats" class="grid3"></div>
+        <ul id="rounds" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- REGLAGES -->
+    <section id="tab-reglages" class="tab">
+      <div class="card">
+        <h2>Détection du golf</h2>
+        <label class="check"><input type="checkbox" id="opt-auto"> Démarrer la carte de score automatiquement quand je suis sur un golf</label>
+        <label class="check"><input type="checkbox" id="opt-wake"> Garder l'écran allumé pendant une partie</label>
+        <button class="btn" id="detect-now">📍 Vérifier maintenant</button>
+        <p class="hint" id="detect-info"></p>
+      </div>
+      <div class="card">
+        <h2>Sauvegarde</h2>
+        <p class="hint">Vos données restent sur ce téléphone. Exportez-les de temps en temps (les vidéos ne sont pas incluses).</p>
+        <div class="row">
+          <button class="btn" id="export">⬇ Exporter</button>
+          <label class="btn file">⬆ Importer<input type="file" id="import" accept="application/json" hidden></label>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button data-tab="accueil" class="active">🏠<span>Accueil</span></button>
+    <button data-tab="entrainement">🏋️<span>Entraîn.</span></button>
+    <button data-tab="swing">🎥<span>Swing</span></button>
+    <button data-tab="insta">📌<span>Insta</span></button>
+    <button data-tab="parcours">⛳<span>Parcours</span></button>
+    <button data-tab="reglages">⚙️<span>Réglages</span></button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
